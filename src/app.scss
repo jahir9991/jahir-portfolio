@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* vscode default dark */
+  :root {
+    --activity-bg: #007acc;
+    --sidebar-fg: #cccccc;
+    --sidebar-bg: #323233;
+    --explorer-fg: #cccccc;
+    --explorer-bg: #252526;
+    --editor-fg: #d4d4d4;
+    --editor-bg: #1e1e1e;
+    --off-white: #fafafa;
+  }
+
+  /* .theme-dracula {
+    --activity-bg: #21222c;
+    --sidebar-fg: #000000;
+    --sidebar-bg: #8be9fd;
+    --explorer-fg: #000000;
+    --explorer-bg: #bd93f9;
+    --editor-fg: #000000;
+    --editor-bg: #ff79c6;
+    --off-white: #000000;
+  } */
+}
+
+
+.svelte-fa {
+  @apply inline-block;
+  /* width: 0.625em; */
+}
+
+body {
+ 
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+* {
+  @apply transition-all;
+}
