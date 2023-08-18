@@ -1,5 +1,6 @@
 [[ d1_databases ]]
-binding = "MYDB" 
-database_name = "portfolio"
-database_id = "45e9c229-a924-4c5a-b1c3-7a225d7a677d"
-compatibility-date= "2023-08-18"
+binding = "jahirdb" 
+database_name = "jahirdb"
+compatibility-date= "2023-08-14"
+database_id = "3e4cea02-2d35-4f91-90af-3b4ee2279191"
+preview_database_id= "jahirdb"

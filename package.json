@@ -6,9 +6,14 @@
     "start": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
+    "wr": "wrangler pages dev  --d1=jahirdb  -- npm run start ",
+    "wr-b": "wrangler pages dev .svelte-kit/cloudflare --d1=jahirdb",
+    "gen": "drizzle-kit generate:sqlite --schema=src/schema/index.ts",
+    "up": "drizzle-kit up:sqlite --schema=src/schema/index.ts",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
+
   "devDependencies": {
     "@fontsource/fira-mono": "^4.5.10",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
@@ -19,6 +24,8 @@
     "@types/cookie": "^0.5.1",
     "autoprefixer": "^10.4.14",
     "cssnano": "^5.1.14",
+    "drizzle-kit": "^0.19.13",
+    "drizzle-orm": "^0.28.2",
     "postcss": "^8.4.27",
     "postcss-import": "^15.1.0",
     "postcss-nested": "^6.0.0",
@@ -34,6 +41,7 @@
   },
   "type": "module",
   "dependencies": {
-    "better-sqlite3": "^8.5.1"
+    "better-sqlite3": "8.0.1",
+    "wrangler": "^3.5.1"
   }
 }

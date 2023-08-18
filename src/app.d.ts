@@ -7,18 +7,18 @@ declare global {
 		// interface PageData {}
 		interface Platform {
 			env: {
-			  MYDB: D1Database;
+				jahirdb: D1Database;
 			};
 			// context: {
 			//   waitUntil(promise: Promise<any>): void;
 			// };
 			// caches: CacheStorage & { default: Cache };
-		  }
+		}
 	}
 }
 
 declare module '@fortawesome/pro-solid-svg-icons/index.es' {
 	export * from '@fortawesome/pro-solid-svg-icons';
-  }
+}
 
-export {};
+export { };
