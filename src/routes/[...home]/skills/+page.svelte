@@ -1,6 +1,7 @@
 <script>
   import SubMenu from "$lib/components/sub-menu.svelte";
-  import HomePage from "../../pages/homePage.svelte";
+    import Skillpage from "../../../pages/skillpage.svelte";
+
 </script>
 
 <div class="grid grid-cols-6 h-full w-full">
@@ -8,6 +9,6 @@
     <SubMenu />
   </div>
   <div class="side-menu h-full w-full col-span-5">
-    <HomePage />
+    <Skillpage></Skillpage>
   </div>
 </div>

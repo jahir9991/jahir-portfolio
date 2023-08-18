@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 @layer base {
+
   /* vscode default dark */
   :root {
     --activity-bg: #007acc;
@@ -36,10 +37,35 @@
 }
 
 body {
- 
+
   font-family: 'Chakra Petch', sans-serif;
 }
 
+*,
+*:before,
+*:after {
+  outline: calc(var(--debug) * 1px) red dashed;
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
 * {
-  @apply transition-all;
+  scrollbar-width: auto;
+  scrollbar-color: #8f54a03c #ffffff00;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #00020d5b;
+  border-radius: 10px;
+  border: 3px solid #ffffff00;
 }
