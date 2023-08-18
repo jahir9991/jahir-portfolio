@@ -5,7 +5,15 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		// interface Platform {}
+		interface Platform {
+			env: {
+			  MYDB: D1Database;
+			};
+			// context: {
+			//   waitUntil(promise: Promise<any>): void;
+			// };
+			// caches: CacheStorage & { default: Cache };
+		  }
 	}
 }
 

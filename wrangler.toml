@@ -1,0 +1,5 @@
+[[ d1_databases ]]
+binding = "MYDB" 
+database_name = "portfolio"
+database_id = "45e9c229-a924-4c5a-b1c3-7a225d7a677d"
+compatibility-date= "2023-08-18"
