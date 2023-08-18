@@ -55,6 +55,8 @@
     import PixelText from "../ui-components/pixel-text.svelte";
     import { flip } from "svelte/animate";
     import MenuCard from "$lib/ui-components/menu-card.svelte";
+    import { skillService } from "$lib/services/skills.service";
+    import { onMount } from "svelte";
     let extensions = [
         // {
         //     icon: faFilter,
@@ -70,17 +72,18 @@
     type Skill = {
         id: string | number;
         name: string;
-        icon: string;
         description: string;
-        creator: string;
+        image: string;
+        link?: string;
         downloads: string;
+        creator: string;
     };
 
     let installedSkilsData: Skill[] = [
         {
             id: 1,
             name: "Javascript",
-            icon: "js",
+            image: "js",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -88,7 +91,7 @@
         {
             id: 2,
             name: "Typescript",
-            icon: "ts",
+            image: "ts",
             downloads: "6.9M",
             description: "A dating app for developers...",
             creator: "@benawad",
@@ -96,7 +99,7 @@
         {
             id: 3,
             name: "Nest",
-            icon: "nest",
+            image: "nest",
             downloads: "500k",
             description: "Voice convos to the moon...",
             creator: "@benawad",
@@ -104,7 +107,7 @@
         {
             id: 4,
             name: "Docker",
-            icon: "docker",
+            image: "docker",
             downloads: "1.5M",
             description: "Material Design Icons for VS...",
             creator: "@PhilippKief",
@@ -112,7 +115,7 @@
         {
             id: 5,
             name: "Java",
-            icon: "java",
+            image: "java",
             downloads: "2.4M",
             description: "Makes it easy to create, manage...",
             creator: "@Microsoft",
@@ -120,7 +123,7 @@
         {
             id: 6,
             name: "C#",
-            icon: "c#",
+            image: "c#",
             downloads: "3.2M",
             description: "Makes it easy to create, manage...",
             creator: "@Microsoft",
@@ -128,7 +131,7 @@
         {
             id: 7,
             name: "Svelte js",
-            icon: "svelte",
+            image: "svelte",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -136,7 +139,7 @@
         {
             id: 8,
             name: "Angular",
-            icon: "angular",
+            image: "angular",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -144,7 +147,7 @@
         {
             id: 9,
             name: "React",
-            icon: "react",
+            image: "react",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -152,7 +155,7 @@
         {
             id: 10,
             name: "Node js",
-            icon: "nodejs",
+            image: "nodejs",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -160,7 +163,7 @@
         {
             id: 11,
             name: "Postgres",
-            icon: "postgres",
+            image: "postgres",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -168,7 +171,7 @@
         {
             id: 12,
             name: "Mongodb",
-            icon: "mongo",
+            image: "mongo",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -176,7 +179,7 @@
         {
             id: 13,
             name: "Cloudflare",
-            icon: "cloudflare",
+            image: "cloudflare",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -184,7 +187,7 @@
         {
             id: 14,
             name: "Aws",
-            icon: "aws",
+            image: "aws",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -192,7 +195,7 @@
         {
             id: 15,
             name: "Gcp",
-            icon: "gcp",
+            image: "gcp",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -200,7 +203,7 @@
         {
             id: 16,
             name: "Kafka",
-            icon: "kafka",
+            image: "kafka",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -208,7 +211,7 @@
         {
             id: 17,
             name: "Next js",
-            icon: "next",
+            image: "next",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -216,7 +219,7 @@
         {
             id: 18,
             name: "Rx js",
-            icon: "rxjs",
+            image: "rxjs",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -224,7 +227,7 @@
         {
             id: 19,
             name: "Flutter",
-            icon: "flutter",
+            image: "flutter",
             downloads: "2.2M",
             description: "Official Dracula Theme. A dark...",
             creator: "@zenorocha",
@@ -241,17 +244,28 @@
     const searchSubject: BehaviorSubject<String> = new BehaviorSubject<String>(
         ""
     );
+
+
+    onMount(()=>{
+        
+    })
+
     const installedSkills: Observable<Skill[]> = searchSubject.pipe(
         distinctUntilChanged(),
         debounceTime(300),
+        switchMap((p)=>{
+            return skillService.getAll()
 
-        switchMap((query: string) =>
-            of(
-                installedSkilsData.filter((skill: Skill) =>
-                    skill.name.toLowerCase().startsWith(query)
-                )
-            )
-        )
+        }),
+        catchError(()=>of([]))
+
+        // switchMap((query: string) =>
+        //     of(
+        //         installedSkilsData.filter((skill: Skill) =>
+        //             skill.name.toLowerCase().startsWith(query)
+        //         )
+        //     )
+        // )
 
         // scan((acc, data) => data)
     );
@@ -318,7 +332,7 @@
                         <!-- <br /> -->
                         <button
                             on:click={() => (active = skill.id)}
-                            class="p-0.5 hover:shadow-2xl "
+                            class="p-0.5 hover:shadow-2xl w-full"
                             animate:flip={{ duration: 300 }}
                         >
                             <MenuCard active={active == skill.id}>
@@ -330,7 +344,7 @@
                                     >
                                         <div class=" text-center rounded-full">
                                             <img
-                                                src="https://skillicons.dev/icons?i={skill.icon}"
+                                                src="{skill.image}"
                                                 alt=""
                                                 srcset=""
                                             />
@@ -339,7 +353,7 @@
                                             <div
                                                 class="flex items-center justify-between"
                                             >
-                                                <div class="text-md font-bold">
+                                                <div class="text-md font-bold capitalize">
                                                     <!-- {skill.name} -->
                                                     <PixelText
                                                         text={skill.name}

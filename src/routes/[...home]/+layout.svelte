@@ -11,12 +11,12 @@
 
 <div class=" window">
   <div class="frame">
-    <div class="top">
+    <!-- <div class="top">
       <div class="circle red" />
       <div class="circle yellow" />
       <div class="circle green" />
-    </div>
-    <div class="body pb-10">
+    </div> -->
+    <div class="body">
       <div class="flex h-full w-full">
         <MainMenu />
         <div class=" main-body relative bg-amber-700 h-full w-full">
@@ -34,7 +34,7 @@
 
 <style lang="postcss">
   .window {
-    @apply p-2;
+    /* @apply p-2; */
     .frame {
       /* @apply bg-red; */
 
@@ -42,13 +42,13 @@
 
       .body {
         @apply w-full  relative;
-        height: 92vh;
+        height: 100vh;
       }
       .top {
         @apply bg-slate-200 flex gap-2;
         display: flex;
 
-        @apply px-4 py-3;
+        @apply px-4 py-1;
 
         .circle {
           @apply w-4 h-4 rounded-full bg-black;

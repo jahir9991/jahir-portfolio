@@ -39,5 +39,5 @@ You can preview the production build with `npm run preview`.
 npm run generate
 
 
-wrangler d1 execute jahirdb --local --file=./drizzle/0000_misty_peter_quill.sql
+wrangler d1 execute jahirdb --local --file=./drizzle/0001_sleepy_gamora.sql
 wrangler dev --local -- persist

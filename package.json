@@ -5,15 +5,15 @@
   "scripts": {
     "start": "vite dev",
     "build": "vite build",
+    "build:watch": "vite build -w",
     "preview": "vite preview",
-    "wr": "wrangler pages dev  --d1=jahirdb  -- npm run start ",
-    "wr-b": "wrangler pages dev .svelte-kit/cloudflare --d1=jahirdb",
-    "gen": "drizzle-kit generate:sqlite --schema=src/schema/index.ts",
-    "up": "drizzle-kit up:sqlite --schema=src/schema/index.ts",
+    "wr": "wrangler pages dev .svelte-kit/cloudflare --local --d1=jahirdb",
+    "gen": "drizzle-kit generate:sqlite --out migrations --schema=src/schema/index.ts",
+    "migration": "wrangler d1 migrations apply jahirdb --local",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "tail": "npx wrangler pages deployment tail"
   },
-
   "devDependencies": {
     "@fontsource/fira-mono": "^4.5.10",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
