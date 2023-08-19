@@ -44,5 +44,8 @@
     "vite": "^4.4.9",
     "wrangler": "^3.5.1"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "better-sqlite3": "^8.5.1"
+  }
 }
