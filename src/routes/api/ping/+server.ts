@@ -12,6 +12,10 @@ export async function POST(full) {
 export async function GET(full) {
 
 
+
+
+
+
     return json({
         ENV_FROM_DOT,
         ENV_CHNAGE_FROM_CF
