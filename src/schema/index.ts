@@ -10,6 +10,7 @@ export const Skill = sqliteTable('skill', {
 	link: text('link').notNull(),
 	creator: text('creator'),
 	isActive: integer('is_active',{mode:'boolean'}).default(true),
+
 	createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 	deletedAt: text("deleted_at"),
 	updatedAt: text("updated_at"),
