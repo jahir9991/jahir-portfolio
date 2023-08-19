@@ -325,7 +325,7 @@
     </div>
 
     <div class=" relative bg-explorer-bg w-full h-[70vh] md:h-[88vh]">
-        <div class=" absolute overflow-y-scroll top-0 bottom-10">
+        <div class=" absolute overflow-y-scroll w-full top-0 bottom-10">
             <div class="relative ">
                 {#if $installedSkills}
                     {#each $installedSkills as skill (skill.id)}
