@@ -36,3 +36,8 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+npm run generate
+
+
+wrangler d1 execute jahirdb --local --file=./drizzle/0001_sleepy_gamora.sql
+wrangler dev --local -- persist

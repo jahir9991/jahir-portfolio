@@ -3,14 +3,24 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			db:DrizzleD1Database
+		}
 		// interface PageData {}
-		// interface Platform {}
+		interface Platform {
+			env: {
+				jahir_db: D1Database;
+			};
+			// context: {
+			//   waitUntil(promise: Promise<any>): void;
+			// };
+			// caches: CacheStorage & { default: Cache };
+		}
 	}
 }
 
 declare module '@fortawesome/pro-solid-svg-icons/index.es' {
 	export * from '@fortawesome/pro-solid-svg-icons';
-  }
+}
 
-export {};
+export { };

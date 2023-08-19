@@ -1,12 +1,20 @@
 {
   "name": "getinstant-web1",
   "version": "0.0.1",
+  "license": "Apache-2.0",
   "scripts": {
     "start": "vite dev",
     "build": "vite build",
+    "build:w": "vite build -w",
     "preview": "vite preview",
+    "wr": "wrangler pages dev .svelte-kit/cloudflare --local --d1=jahir_db",
+    "gen": "drizzle-kit generate:sqlite --out migrations --schema=src/schema/index.ts",
+    "mig:dev": "wrangler d1 migrations apply jahir_db --local -e dev",
+    "mig:staging": "wrangler d1 migrations apply jahir_staging_db  -e staging",
+    "mig:prod": "wrangler d1 migrations apply jahir_prod_db -e prod",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "tail": "npx wrangler pages deployment tail"
   },
   "devDependencies": {
     "@fontsource/fira-mono": "^4.5.10",
@@ -17,18 +25,24 @@
     "@sveltejs/kit": "^1.22.6",
     "@types/cookie": "^0.5.1",
     "autoprefixer": "^10.4.14",
+    "better-sqlite3": "8.0.1",
     "cssnano": "^5.1.14",
+    "drizzle-kit": "^0.19.13",
+    "drizzle-orm": "^0.28.2",
     "postcss": "^8.4.27",
     "postcss-import": "^15.1.0",
     "postcss-nested": "^6.0.0",
+    "rxjs": "^7.8.1",
     "sass": "^1.58.0",
     "svelte": "^4.2.0",
     "svelte-check": "^3.4.3",
     "svelte-fa": "^3.0.4",
+    "svelte-french-toast": "^1.2.0",
     "tailwindcss": "^3.3.3",
     "tslib": "^2.4.1",
     "typescript": "^5.0.0",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "wrangler": "^3.5.1"
   },
   "type": "module"
 }
