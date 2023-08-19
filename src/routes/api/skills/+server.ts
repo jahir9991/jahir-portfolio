@@ -11,7 +11,7 @@ export async function GET({ request, platform, locals, params, url }) {
         // const query = locals.db.select().from(Skill);
         // const result = await query.all();
 
-        let searchTerm = url.searchParams.get('q') ??"";
+        let searchTerm = url.searchParams.get('q') ?? "";
         let limit: number = Number(url.searchParams.get('limit') ?? 10);
         let page: number = Number(url.searchParams.get('page') ?? 1);
 
@@ -24,7 +24,7 @@ export async function GET({ request, platform, locals, params, url }) {
         }
 
 
-       
+
         const result = await locals.db.select().from(Skill)
             .where(like(Skill.name, `%${searchTerm}%`))
             .limit(limit)
@@ -48,21 +48,9 @@ export async function POST({ request, platform, locals }) {
 
         let { name, description, image, link, creator }: any = await request.json();
 
-        let res;
-
-
-        await locals.db.transaction(
-            async (tx) => {
-                res = await tx.insert(Skill).values({ name, description, image, link, creator }).returning().get();
-            }, {
-            behavior: "deferred",
-        }
-        );
+        let res = await locals.db.insert(Skill).values({ name, description, image, link, creator }).returning().get();
 
         return json({ res });
-
-
-
     } catch (error: any) {
         console.log("err", error);
         return json({ error: error.message }, { status: 400 })

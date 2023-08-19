@@ -28,15 +28,10 @@ export const PUT = async ({ locals, request, params: { id } }) => {
         if (!locals.db) throw new Error("no db found");
 
         const newData: typeof Skill = await request.json();
-        let updatedData;
-
-        await locals.db.transaction(
-            async (tx) => {
-                updatedData = await tx.update(Skill)
-                    .set(newData as any)
-                    .where(eq(Skill.id, Number(id)))
-                    .run();
-            }, { behavior: "deferred", });
+        const updatedData = await locals.db.update(Skill)
+            .set(newData as any)
+            .where(eq(Skill.id, Number(id)))
+            .run();
 
         return json(updatedData);
 
@@ -53,15 +48,9 @@ export const DELETE = async ({ locals, request, params: { id } }) => {
 
         if (!locals.db) throw new Error("no db found");
 
-        let deletedData;
-
-        await locals.db.transaction(
-            async (tx) => {
-                deletedData = await tx.delete(Skill)
-                    .where(eq(Skill.id, Number(id)))
-                    .run();
-            }, { behavior: "deferred", });
-
+        const deletedData = await locals.db.delete(Skill)
+            .where(eq(Skill.id, Number(id)))
+            .run();
 
         return json(deletedData)
 

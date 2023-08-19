@@ -14,7 +14,7 @@ export async function GET({ request, platform, locals }) {
             async (tx) => {
                 res = await tx.insert(Skill).values(dd).returning().get();
             }, {
-            behavior: "deferred",
+            behavior: "immediate",
         }
         );
 
