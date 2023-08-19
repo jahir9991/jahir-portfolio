@@ -27,7 +27,7 @@
     } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa/src/fa.svelte";
     import { crossfade, fade, scale, slide } from "svelte/transition";
-
+    import toast, { Toaster } from 'svelte-french-toast';
     import {
         BehaviorSubject,
         Observable,
@@ -56,7 +56,7 @@
     import { flip } from "svelte/animate";
     import MenuCard from "$lib/ui-components/menu-card.svelte";
     import { skillService } from "$lib/services/skills.service";
-    import { onMount } from "svelte";
+
     let extensions = [
         // {
         //     icon: faFilter,
@@ -238,40 +238,27 @@
 
     let showSearch = false;
     let toggleSearch = () => {
+        toast.success("It works!",{duration:10000});
         showSearch = !showSearch;
     };
 
-    const searchSubject: BehaviorSubject<String> = new BehaviorSubject<String>(
+    const searchSubject: BehaviorSubject<string> = new BehaviorSubject<string>(
         ""
     );
 
-
-    onMount(()=>{
-        
-    })
+    
 
     const installedSkills: Observable<Skill[]> = searchSubject.pipe(
-        distinctUntilChanged(),
+        // filter(q=>q.length>2),
+       
         debounceTime(300),
-        switchMap((p)=>{
-            return skillService.getAll()
+        distinctUntilChanged(),
 
-        }),
-        catchError(()=>of([]))
-
-        // switchMap((query: string) =>
-        //     of(
-        //         installedSkilsData.filter((skill: Skill) =>
-        //             skill.name.toLowerCase().startsWith(query)
-        //         )
-        //     )
-        // )
-
-        // scan((acc, data) => data)
+        switchMap((p) => skillService.getAll(p)),
+        catchError(() => of([]))
     );
 
     const searchNow: any = (e) => {
-        console.log(e);
         searchSubject.next(e.target.value);
     };
 
@@ -326,7 +313,7 @@
 
     <div class=" relative bg-explorer-bg w-full h-[70vh] md:h-[88vh]">
         <div class=" absolute overflow-y-scroll w-full top-0 bottom-10">
-            <div class="relative ">
+            <div class="relative">
                 {#if $installedSkills}
                     {#each $installedSkills as skill (skill.id)}
                         <!-- <br /> -->
@@ -344,7 +331,7 @@
                                     >
                                         <div class=" text-center rounded-full">
                                             <img
-                                                src="{skill.image}"
+                                                src={skill.image}
                                                 alt=""
                                                 srcset=""
                                             />
@@ -353,7 +340,9 @@
                                             <div
                                                 class="flex items-center justify-between"
                                             >
-                                                <div class="text-md font-bold capitalize">
+                                                <div
+                                                    class="text-md font-bold capitalize"
+                                                >
                                                     <!-- {skill.name} -->
                                                     <PixelText
                                                         text={skill.name}

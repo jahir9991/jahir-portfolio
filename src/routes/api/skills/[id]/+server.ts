@@ -4,13 +4,15 @@ import { Skill } from "../../../../schema/index.js";
 import { eq } from 'drizzle-orm';
 export async function GET({ locals, request, platform, url, params }) {
     try {
-        const db = locals.db;
-        const result = await db
+
+        if (!locals.db) throw new Error("no db found");
+
+        const result = await locals.db
             .select().from(Skill)
             .where(eq(Skill.id, Number(params.id)))
             .get();
-        return json(result);
 
+        return json(result);
 
     } catch (error: any) {
         console.log("err", error);
@@ -23,18 +25,24 @@ export async function GET({ locals, request, platform, url, params }) {
 
 export const PUT = async ({ locals, request, params: { id } }) => {
     try {
-        const db: DrizzleD1Database = locals.db;
+        if (!locals.db) throw new Error("no db found");
+
         const newData: typeof Skill = await request.json();
-        const updatedData = await db.update(Skill)
-            .set(newData as any)
-            .where(eq(Skill.id, Number(id)))
-            .run();
+        let updatedData;
+
+        await locals.db.transaction(
+            async (tx) => {
+                updatedData = await tx.update(Skill)
+                    .set(newData as any)
+                    .where(eq(Skill.id, Number(id)))
+                    .run();
+            }, { behavior: "deferred", });
 
         return json(updatedData);
 
     } catch (error: any) {
         console.log("err", error);
-        return  json({ error: error.message }, { status: 400 })
+        return json({ error: error.message }, { status: 400 })
     }
 
 };
@@ -42,11 +50,18 @@ export const PUT = async ({ locals, request, params: { id } }) => {
 
 export const DELETE = async ({ locals, request, params: { id } }) => {
     try {
-        const db: DrizzleD1Database = locals.db;
 
-        const deletedData = await db.delete(Skill)
-            .where(eq(Skill.id, Number(id)))
-            .run();
+        if (!locals.db) throw new Error("no db found");
+
+        let deletedData;
+
+        await locals.db.transaction(
+            async (tx) => {
+                deletedData = await tx.delete(Skill)
+                    .where(eq(Skill.id, Number(id)))
+                    .run();
+            }, { behavior: "deferred", });
+
 
         return json(deletedData)
 
