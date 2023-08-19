@@ -11,9 +11,9 @@ export async function GET({ request, platform, locals, params, url }) {
         // const query = locals.db.select().from(Skill);
         // const result = await query.all();
 
-        let searchTerm = url.searchParams.get('q')
-        let limit: number = Number(url.searchParams.get('limit') || 10);
-        let page: number = Number(url.searchParams.get('page') || 1);
+        let searchTerm = url.searchParams.get('q') ??"";
+        let limit: number = Number(url.searchParams.get('limit') ?? 10);
+        let page: number = Number(url.searchParams.get('page') ?? 1);
         console.log("🚀 ~ file: +server.ts:14 ~ GET ~ searchTerm:", searchTerm)
         console.log("🚀 ~ file: +server.ts:14 ~ GET ~ limit:", limit)
         console.log("🚀 ~ file: +server.ts:14 ~ GET ~ page:", page)

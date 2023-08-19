@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "755c8076-051b-4f41-9297-a77d18e1bc5e",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "5c2826b6-0d7f-4988-bc0b-a89d4d5d4984",
+  "prevId": "1896cf21-1ee5-4ead-9760-ec5e9c00bb54",
   "tables": {
     "skill": {
       "name": "skill",
@@ -59,7 +59,7 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
@@ -67,14 +67,14 @@
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
