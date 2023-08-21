@@ -6,9 +6,9 @@ import { isNull, like } from "drizzle-orm";
 export async function GET({ request, platform, locals, params, url }) {
     try {
 
-        if (!locals.db) throw new Error("no db found");
+        if (!locals.jahir_prod_db) throw new Error("no db found");
 
-        // const query = locals.db.select().from(Skill);
+        // const query = locals.jahir_prod_db.select().from(Skill);
         // const result = await query.all();
 
         let searchTerm = url.searchParams.get('q') ?? "";
@@ -25,7 +25,7 @@ export async function GET({ request, platform, locals, params, url }) {
 
 
 
-        const result = await locals.db.select().from(Skill)
+        const result = await locals.jahir_prod_db.select().from(Skill)
             .where(like(Skill.name, `%${searchTerm}%`))
             .limit(limit)
             .offset((page - 1) * limit)
@@ -44,11 +44,11 @@ export async function GET({ request, platform, locals, params, url }) {
 export async function POST({ request, platform, locals }) {
     try {
 
-        if (!locals.db) throw new Error("no db found");
+        if (!locals.jahir_prod_db) throw new Error("no db found");
 
         let { name, description, image, link, creator }: any = await request.json();
 
-        let res = await locals.db.insert(Skill).values({ name, description, image, link, creator }).returning().get();
+        let res = await locals.jahir_prod_db.insert(Skill).values({ name, description, image, link, creator }).returning().get();
 
         return json({ res });
     } catch (error: any) {

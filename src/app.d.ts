@@ -4,17 +4,17 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			db:DrizzleD1Database
+			jahir_prod_db:DrizzleD1Database
 		}
 		// interface PageData {}
 		interface Platform {
-			env: {
-				jahir_db: D1Database;
+			env?: {
+				jahir_prod_db: D1Database;
 			};
-			// context: {
-			//   waitUntil(promise: Promise<any>): void;
-			// };
-			// caches: CacheStorage & { default: Cache };
+			context: {
+			  waitUntil(promise: Promise<any>): void;
+			};
+			caches: CacheStorage & { default: Cache };
 		}
 	}
 }

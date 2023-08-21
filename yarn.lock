@@ -47,7 +47,7 @@
   resolved "https://registry.yarnpkg.com/@cloudflare/workerd-windows-64/-/workerd-windows-64-1.20230814.1.tgz#9abc18825ee75142baf46905d6e1ba1904919705"
   integrity sha512-GWHqfyhsG/1wm2W8afkYX3q3fWXUWWD8NGtHfAs6ZVTHdW3mmYyMhKR0lc6ptBwz5i5aXRlP2S+CxxxwwDbKpw==
 
-"@cloudflare/workers-types@^4.20230404.0":
+"@cloudflare/workers-types@^4.20230404.0", "@cloudflare/workers-types@^4.20230419.0":
   version "4.20230814.0"
   resolved "https://registry.yarnpkg.com/@cloudflare/workers-types/-/workers-types-4.20230814.0.tgz#7aadd4f600b1cf772a26160bd5ea836fa2aa42f6"
   integrity sha512-+jHiGjZg2UpULZSSHmHLqUG45TLg1s+uppSMlGvMn0u/xyFsRX9HX6b8Ydg/oHSp3jfSuPtX05GSvtgRAmrWTg==
@@ -641,7 +641,7 @@ base64-js@^1.3.1:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
-better-sqlite3@^8.1.0, better-sqlite3@^8.5.1:
+better-sqlite3@^8.1.0:
   version "8.5.1"
   resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-8.5.1.tgz#984f7645303afa76289569804ee56e211d8ffa66"
   integrity sha512-aDfC67xfll6bugnOqRJhdUWioQZnkhLkrwZ+oo6yZbNMtyktbwkDO4SfBcCVWbm4BlsCjCNTJchlHaBt+vB4Iw==
@@ -774,6 +774,11 @@ capnp-ts@^0.7.0:
   dependencies:
     debug "^4.3.1"
     tslib "^2.2.0"
+
+cf-workers-proxy@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/cf-workers-proxy/-/cf-workers-proxy-0.4.0.tgz#7a3ed7ba1cd1b35ad8e2f944df60203cb3846902"
+  integrity sha512-QAxFHUtNKOXjY22cKBf7phEGltZDdZ30n8crmq8/yP5Zkq5Wpy48muGSkaoHKOvdOELSh46AlvXsabulbvQ5QQ==
 
 chalk@^5.2.0:
   version "5.3.0"

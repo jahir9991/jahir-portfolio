@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "755c8076-051b-4f41-9297-a77d18e1bc5e",
+  "id": "773cace6-551c-4d56-b565-e4cc99d9b8ed",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "skill": {
@@ -59,7 +59,7 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
@@ -67,14 +67,14 @@
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

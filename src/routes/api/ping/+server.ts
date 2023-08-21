@@ -2,14 +2,17 @@ import { json } from '@sveltejs/kit';
 import { MYENV } from '../../../MYENV';
 import { ENV_CHNAGE_FROM_CF, ENV_FROM_DOT } from '$env/static/private';
 
-export async function POST(full) {
+export async function GET(full) {
 
 
-    return json(full)
+    return json({
+          full
+        , time: Date.now()
+    })
 
 }
 
-export async function GET(full) {
+export async function POST(full) {
 
 
 
