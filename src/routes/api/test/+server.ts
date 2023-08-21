@@ -5,13 +5,13 @@ import type { DrizzleD1Database } from 'drizzle-orm/d1/index.js';
 export async function GET({ request, platform, locals }) {
     try {
 
-        if (!locals.jahir_prod_db) throw new Error("no db found");
+        if (!locals.jahir_db) throw new Error("no db found");
 
-        const DB: DrizzleD1Database = locals.jahir_prod_db;
+        const DB: DrizzleD1Database = locals.jahir_db;
 
 
-        const result = await platform.env.jahir_prod_db.batch ([
-            platform.env.jahir_prod_db.prepare("SELECT * from skill;"),
+        const result = await platform.env.jahir_db.batch ([
+            platform.env.jahir_db.prepare("SELECT * from skill;"),
         ]);
         return new Response(JSON.stringify(result));
 
@@ -29,11 +29,11 @@ export async function GET({ request, platform, locals }) {
 export async function POST({ request, platform, locals }) {
     try {
 
-        if (!locals.jahir_prod_db) throw new Error("no db found");
+        if (!locals.jahir_db) throw new Error("no db found");
 
         let { name, description, image, link, creator }: any = await request.json();
 
-        let res = await locals.jahir_prod_db.insert(Skill).values({ name, description, image, link, creator }).returning().get();
+        let res = await locals.jahir_db.insert(Skill).values({ name, description, image, link, creator }).returning().get();
 
 
         return json({ res });

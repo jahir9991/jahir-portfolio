@@ -4,12 +4,12 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			jahir_prod_db:DrizzleD1Database
+			jahir_db:DrizzleD1Database
 		}
 		// interface PageData {}
 		interface Platform {
 			env?: {
-				jahir_prod_db: D1Database;
+				jahir_db: D1Database;
 			};
 			context: {
 			  waitUntil(promise: Promise<any>): void;

@@ -5,14 +5,14 @@
   "scripts": {
     "start": "vite dev",
     "build": "vite build",
-    "ok": "wrangler pages dev --d1=jahir_prod_db  -- yarn start",
     "build:w": "vite build -w",
     "preview": "vite preview",
     "wr": "wrangler pages dev .svelte-kit/cloudflare",
     "gen": "drizzle-kit generate:sqlite --out migrations --schema=src/schema/index.ts",
-    "mig:dev": "wrangler d1 migrations apply jahir_prod_db --local",
+    "mig:dev": "wrangler d1 migrations apply jahir_db --local",
     "mig:staging": "wrangler d1 migrations apply jahir_staging_db  -e staging",
-    "mig:prod": "wrangler d1 migrations apply jahir_prod_db -e prod",
+    "mig:prod": "wrangler d1 migrations apply jahir_db -e prod",
+    "try": "wrangler pages dev --d1=jahir_db  -- yarn start",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "tail": "npx wrangler pages deployment tail"

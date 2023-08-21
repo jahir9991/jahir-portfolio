@@ -8,10 +8,10 @@ import { MYENV } from "./MYENV";
 const injectDB = async (event) => {
 
   try {
-    if (event.platform?.env?.jahir_prod_db) {
-      event.locals.jahir_prod_db = drizzle(event.platform?.env?.jahir_prod_db)
+    if (event.platform?.env?.jahir_db) {
+      event.locals.jahir_db = drizzle(event.platform?.env?.jahir_db)
     } else {
-      event.locals.jahir_prod_db = (await import(MYENV.LOCAL_DB_PATH)).default;
+      event.locals.jahir_db = (await import(MYENV.LOCAL_DB_PATH)).default;
     }
 
   } catch (error) {

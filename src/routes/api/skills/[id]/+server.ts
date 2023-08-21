@@ -5,9 +5,9 @@ import { eq } from 'drizzle-orm';
 export async function GET({ locals, request, platform, url, params }) {
     try {
 
-        if (!locals.jahir_prod_db) throw new Error("no db found");
+        if (!locals.jahir_db) throw new Error("no db found");
 
-        const result = await locals.jahir_prod_db
+        const result = await locals.jahir_db
             .select().from(Skill)
             .where(eq(Skill.id, Number(params.id)))
             .get();
@@ -25,10 +25,10 @@ export async function GET({ locals, request, platform, url, params }) {
 
 export const PUT = async ({ locals, request, params: { id } }) => {
     try {
-        if (!locals.jahir_prod_db) throw new Error("no db found");
+        if (!locals.jahir_db) throw new Error("no db found");
 
         const newData: typeof Skill = await request.json();
-        const updatedData = await locals.jahir_prod_db.update(Skill)
+        const updatedData = await locals.jahir_db.update(Skill)
             .set(newData as any)
             .where(eq(Skill.id, Number(id)))
             .run();
@@ -46,9 +46,9 @@ export const PUT = async ({ locals, request, params: { id } }) => {
 export const DELETE = async ({ locals, request, params: { id } }) => {
     try {
 
-        if (!locals.jahir_prod_db) throw new Error("no db found");
+        if (!locals.jahir_db) throw new Error("no db found");
 
-        const deletedData = await locals.jahir_prod_db.delete(Skill)
+        const deletedData = await locals.jahir_db.delete(Skill)
             .where(eq(Skill.id, Number(id)))
             .run();
 
