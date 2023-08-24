@@ -3,13 +3,12 @@ import { Skill } from '../../../schema/index';
 import { isNull, like } from "drizzle-orm";
 
 
-export async function GET({ request, platform, locals, params, url }) {
+export async function GET({ locals, url }) {
     try {
 
-        if (!locals.jahir_db) throw new Error("no db found");
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
-        // const query = locals.jahir_db.select().from(Skill);
-        // const result = await query.all();
 
         let searchTerm = url.searchParams.get('q') ?? "";
         let limit: number = Number(url.searchParams.get('limit') ?? 10);
@@ -19,13 +18,8 @@ export async function GET({ request, platform, locals, params, url }) {
         console.log("🚀 ~ file: +server.ts:14 ~ GET ~ limit:", limit)
         console.log("🚀 ~ file: +server.ts:14 ~ GET ~ page:", page)
 
-        if (searchTerm) {
 
-        }
-
-
-
-        const result = await locals.jahir_db.select().from(Skill)
+        const result = await DB.select().from(Skill)
             .where(like(Skill.name, `%${searchTerm}%`))
             .limit(limit)
             .offset((page - 1) * limit)
@@ -41,14 +35,15 @@ export async function GET({ request, platform, locals, params, url }) {
     }
 
 }
-export async function POST({ request, platform, locals }) {
+export async function POST({ request, locals }) {
     try {
 
-        if (!locals.jahir_db) throw new Error("no db found");
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
         let { name, description, image, link, creator }: any = await request.json();
 
-        let res = await locals.jahir_db.insert(Skill).values({ name, description, image, link, creator }).returning().get();
+        let res = await DB.insert(Skill).values({ name, description, image, link, creator }).returning().get();
 
         return json({ res });
     } catch (error: any) {

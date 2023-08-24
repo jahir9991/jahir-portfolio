@@ -2,11 +2,11 @@
 #This is a staging environment
 [env.staging]
 d1_databases = [
-    { binding = "jahir_db", database_name = "jahir_staging_db", database_id = "any" },
+    { binding = "DB", database_name = "jahir_staging_db", database_id = "any" },
 ]
 
 
 [env.dev]
 d1_databases = [
-    { binding = "jahir_db", database_name = "jahir_db", database_id = "jahir_db",preview_database_id="jahir_db" },
+    { binding = "DB", database_name = "jahir_db", database_id = "jahir_db",preview_database_id="jahir_db" },
 ]

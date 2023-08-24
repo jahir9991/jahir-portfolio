@@ -2,12 +2,13 @@ import { json, } from "@sveltejs/kit";
 import type { DrizzleD1Database } from 'drizzle-orm/d1';
 import { Skill } from "../../../../schema/index.js";
 import { eq } from 'drizzle-orm';
-export async function GET({ locals, request, platform, url, params }) {
+export async function GET({ locals, params }) {
     try {
 
-        if (!locals.jahir_db) throw new Error("no db found");
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
-        const result = await locals.jahir_db
+        const result = await DB
             .select().from(Skill)
             .where(eq(Skill.id, Number(params.id)))
             .get();
@@ -25,10 +26,11 @@ export async function GET({ locals, request, platform, url, params }) {
 
 export const PUT = async ({ locals, request, params: { id } }) => {
     try {
-        if (!locals.jahir_db) throw new Error("no db found");
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
         const newData: typeof Skill = await request.json();
-        const updatedData = await locals.jahir_db.update(Skill)
+        const updatedData = await DB.update(Skill)
             .set(newData as any)
             .where(eq(Skill.id, Number(id)))
             .run();
@@ -43,12 +45,13 @@ export const PUT = async ({ locals, request, params: { id } }) => {
 };
 
 
-export const DELETE = async ({ locals, request, params: { id } }) => {
+export const DELETE = async ({ locals, params: { id } }) => {
     try {
 
-        if (!locals.jahir_db) throw new Error("no db found");
+        if (!locals.DB) throw new Error("no db found");
+        const DB = locals.DB;
 
-        const deletedData = await locals.jahir_db.delete(Skill)
+        const deletedData = await DB.delete(Skill)
             .where(eq(Skill.id, Number(id)))
             .run();
 

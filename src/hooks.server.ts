@@ -1,17 +1,48 @@
 import type { Handle } from "@sveltejs/kit";
 import { drizzle } from "drizzle-orm/d1";
 import { MYENV } from "./MYENV";
+import { connectD1 } from 'wrangler-proxy'
+import { createBridge } from "cfw-bindings-wrangler-bridge";
 
-// let dd = './getLocalDB';
 
+
+const hostname = 'http://127.0.0.1:8787';
 
 const injectDB = async (event) => {
+  try {
+    if (event.platform?.env?.DB) {
+      event.locals.DB = drizzle(event.platform?.env?.DB)
+    } else {
+      //proxy
+      // const dd = connectD1('DB', { hostname });
+      // event.locals.DB = drizzle(dd);
+
+      //bridge
+      const bridge = createBridge(hostname);
+      event.locals.DB = drizzle(bridge.D1Database('DB'))
+    }
+
+  } catch (error) {
+    console.log("🚀 ~ file: hooks.server.ts:12 ~ consthandle:Handle= ~ error:", error)
+
+  }
+
+
+}
+
+
+const injectKV = async (event) => {
 
   try {
-    if (event.platform?.env?.jahir_db) {
-      event.locals.jahir_db = drizzle(event.platform?.env?.jahir_db)
+    if (event.platform?.env?.KV) {
+      event.locals.KV = event.platform?.env?.KV
     } else {
-      event.locals.jahir_db = (await import(MYENV.LOCAL_DB_PATH)).default;
+      //proxy
+      // event.locals.KV = connectKV('KV', { hostname });
+
+      //bridge
+      const bridge = createBridge(hostname);
+      event.locals.KV = bridge.KVNamespace('KV');
     }
 
   } catch (error) {
